@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_package = "com.budlee.httpstreaming";
+
+
+message CalculatorRequest {
+  double number1 = 1;
+  double number2 = 2;
+  OperationType operation = 3;
+  int32 count=4;
+
+  enum OperationType {
+    ADD = 0;
+    SUBTRACT = 1;
+    MULTIPLY = 2;
+    DIVIDE = 3;
+  }
+}
+
+message CalculatorResponse {
+  double result = 1;
+}
+
+
+service Calculator {
+  rpc Calculate(CalculatorRequest) returns (CalculatorResponse) {}
+  rpc CalculaterRecursive(CalculatorRequest) returns (stream CalculatorResponse) {}
+}
